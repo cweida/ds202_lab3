@@ -31,6 +31,11 @@ ggarrange(plotMale, plotFemale, common.legend = TRUE, )
 
 ```
 
+### 3
+How des the happiness of a respondent relate to the political party affiliation?
 
+```{r}
+
+```
 
 
