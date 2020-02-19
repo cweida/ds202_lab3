@@ -1,36 +1,19 @@
----
-title: "ds202_lab3"
-author: 'Chase Weida; Github: cweida'
-date: "2/19/2020"
-output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(ggplot2)
+library(ggmosaic)
+install.packages("ggpubr")
 library(ggpubr)
-```
-
-### 1
-How does the happiness of a respondent relate to the marriage status?
-
-```{r}
 dat <- read_xls('../ds202_lab3/Data/GSS.xls')
+
+colnames(dat)
 colnames(dat) <- c("Year", "id", "Work_per_wk", "Marital_Status", "Spouse_Education", "Sex", "Political_Party", "General_Happiness", "Ballot_used")
-ggplot(dat, aes(x = General_Happiness, fill = Marital_Status)) + geom_bar()
-```
+dat
+ggplot(dat) + geom_mosaic(aes(x = product(Marital_Status, Sex), fill = General_Happiness))
 
-### 2
-Does the sex of the respondent affect the relationship you found in Q1?
+dat$G
+dat
 
-```{r}
+ggplot(dat, aes(x = dat$`General happiness`, fill = dat$`Marital status`)) + geom_bar()
 plotMale <- ggplot(dat) + ggtitle('Happiness vs Marital Status in Females') + geom_bar(data = dat[dat$Sex == 'Female', ], aes(x = General_Happiness, fill = Marital_Status)) + theme(legend.position = "none")  
 plotFemale <- ggplot(dat) + ggtitle('Happiness vs Marital Status in Males') + geom_bar(data = dat[dat$Sex == 'Male', ], aes(x = General_Happiness, fill = Marital_Status))
-ggarrange(plotMale, plotFemale, common.legend = TRUE, )
-
-```
-
-
-
-
+ggarrange(plotMale, plotFemale)
