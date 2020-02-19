@@ -1,0 +1,14 @@
+---
+title: "ds202_lab3"
+author: 'Chase Weida; Github: cweida'
+date: "2/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+```
+```{r}
+dat <- read_xls('/Users/chase/Downloads/GSS.xls')
+```
