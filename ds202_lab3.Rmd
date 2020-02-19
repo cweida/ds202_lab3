@@ -23,6 +23,11 @@ ggplot(dat, aes(x = dat$`General happiness`, fill = dat$`Marital status`)) + geo
 Does the sex of the respondent affect the relationship you found in Q1?
 
 
+### 3
+How des the happiness of a respondent relate to the political party affiliation?
 
+```{r}
+
+```
 
 
