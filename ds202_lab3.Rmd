@@ -8,7 +8,21 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
+library(ggplot2)
 ```
+
+### 1
+How does the happiness of a respondent relate to the marriage status?
+
 ```{r}
-dat <- read_xls('/Users/chase/Downloads/GSS.xls')
+dat <- read_xls('../ds202_lab3/Data/GSS.xls')
+ggplot(dat, aes(x = dat$`General happiness`, fill = dat$`Marital status`)) + geom_bar()
 ```
+
+### 2
+Does the sex of the respondent affect the relationship you found in Q1?
+
+
+
+
+
