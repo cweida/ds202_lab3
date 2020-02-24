@@ -32,10 +32,13 @@ ggarrange(plotMale, plotFemale, common.legend = TRUE, )
 ```
 
 ### 3
-How des the happiness of a respondent relate to the political party affiliation?
+How does the happiness of a respondent relate to the political party affiliation?
 
 ```{r}
-
+dat1 <- dat[!is.na(dat$General_Happiness),]
+dat1$Political_Party <- factor(dat1$Political_Party, levels=c("No answer", "Don't know", "Other party", "Strong democrat", "Not str democrat", "Ind,near dem", "Independent", "Ind,near rep", "Not str republican", "Strong republican"))
+ggplot(dat1) + 
+  geom_bar(aes(x = General_Happiness, fill = Political_Party), position = position_dodge(preserve = 'single'))
 ```
 
 
