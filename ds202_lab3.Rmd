@@ -21,6 +21,10 @@ colnames(dat) <- c("Year", "id", "Work_per_wk", "Marital_Status", "Spouse_Educat
 ggplot(dat, aes(x = General_Happiness, fill = Marital_Status)) + geom_bar()
 ```
 
+One can see that the "Pretty Happy" responders have much a much higher proportion of respondents who were never married. This is opposed to the "Very Happy" column which has a much higher number of respondents who are married.
+
+
+
 ### 2
 Does the sex of the respondent affect the relationship you found in Q1?
 
@@ -30,6 +34,8 @@ plotFemale <- ggplot(dat) + ggtitle('Happiness vs Marital Status in Males') + ge
 ggarrange(plotMale, plotFemale, common.legend = TRUE)
 
 ```
+
+Sex definitely plays a part in the relationship observed above. For example, in the section of the "Pretty Happy" population who never married, a strong majority were men as opposed to women.
 
 ### 3
 How does the happiness of a respondent relate to the political party affiliation?
@@ -68,3 +74,22 @@ ggplot(dat3, aes(x = Marital_Status, fill = Political_Party)) +
 ```
 
 It is more likely for a married or widowed person to be a Republican or a Republican leaning independent, than it is for a divorced, separated, or never married individual.
+
+### 4c
+Does a more highly educated spouse correlate to higher reported happiness?
+
+```{r}
+ggplot(data = dat, mapping = aes(x = factor(Spouse_Education, level = c(0:20)), fill = General_Happiness)) + geom_bar() + coord_flip()
+```
+
+It appears as though most education levels share the same distribution of reported happiness levels. 
+
+### 4d
+Does the sex of the respondent affect their political party affiliation?
+
+```{r}
+ggplot(dat, aes(x = Sex, fill = Political_Party)) + geom_bar()
+ggplot(dat, aes(x = Political_Party, fill = Sex)) + geom_bar() + coord_flip()
+```
+
+One may see from the two representations of the data that female responders share a very similar political party afiliation distribution compared to their male counter parts. It seems that the distribution of females respond with slightly higher frequency into the "not strong" democrat and republican categories than their male counterparts. 
