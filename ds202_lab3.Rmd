@@ -27,7 +27,7 @@ Does the sex of the respondent affect the relationship you found in Q1?
 ```{r}
 plotMale <- ggplot(dat) + ggtitle('Happiness vs Marital Status in Females') + geom_bar(data = dat[dat$Sex == 'Female', ], aes(x = General_Happiness, fill = Marital_Status)) + theme(legend.position = "none")  
 plotFemale <- ggplot(dat) + ggtitle('Happiness vs Marital Status in Males') + geom_bar(data = dat[dat$Sex == 'Male', ], aes(x = General_Happiness, fill = Marital_Status))
-ggarrange(plotMale, plotFemale, common.legend = TRUE, )
+ggarrange(plotMale, plotFemale, common.legend = TRUE)
 
 ```
 
@@ -37,8 +37,34 @@ How does the happiness of a respondent relate to the political party affiliation
 ```{r}
 dat1 <- dat[!is.na(dat$General_Happiness),]
 dat1$Political_Party <- factor(dat1$Political_Party, levels=c("No answer", "Don't know", "Other party", "Strong democrat", "Not str democrat", "Ind,near dem", "Independent", "Ind,near rep", "Not str republican", "Strong republican"))
-ggplot(dat1) + 
-  geom_bar(aes(x = General_Happiness, fill = Political_Party), position = position_dodge(preserve = 'single'))
+ggplot(dat1, aes(x = Political_Party, fill = General_Happiness))+ geom_bar() + coord_flip()
 ```
 
+Democrats and Democrat leaning independents tended to be happier than their Republican counterparts.
 
+### 4a
+How does the poltical party affiliation relate to the year the survey was conducted?
+
+```{r}
+dat2 <- dat[!(dat$Political_Party == "Don't know" | dat$Political_Party == "No answer"),]
+dat2$Political_Party <- factor(dat2$Political_Party, levels=c("No answer", "Don't know", "Other party", "Strong democrat", "Not str democrat", "Ind,near dem", "Independent", "Ind,near rep", "Not str republican", "Strong republican"))
+ggplot(dat2, aes(x = Year, fill = Political_Party)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent)
+```
+
+There was a rise in the number of Republicans and Republican leaning independents between 1980 and 1990 but then it went back down.
+
+### 4b
+What is the relation between marital status and political party affiliation?
+
+```{r}
+dat3 <- dat[!(dat$Political_Party == "Don't know" | dat$Political_Party == "No answer" | is.na(dat$Political_Party)),]
+dat3 <- dat3[!(is.na(dat3$Marital_Status) | dat3$Marital_Status == "No answer"),]
+dat3$Political_Party <- factor(dat3$Political_Party, levels=c("No answer", "Don't know", "Other party", "Strong democrat", "Not str democrat", "Ind,near dem", "Independent", "Ind,near rep", "Not str republican", "Strong republican"))
+ggplot(dat3, aes(x = Marital_Status, fill = Political_Party)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent)
+```
+
+It is more likely for a married or widowed person to be a Republican or a Republican leaning independent, than it is for a divorced, separated, or never married individual.
